@@ -1,24 +1,29 @@
-import React, { useEffect } from 'react'
-import useAuth from '../hooks/useAuth'
+import React, { useEffect } from 'react';
 import useUser from '../hooks/useUser';
 
 export default function Home() {
-    const { user } = useAuth();
-    const getUser = useUser()
+    const { getUser, user, balance } = useUser();
 
     useEffect(() => {
-        getUser()
-    }, [])
+        getUser();
+    }, [getUser]); // Add getUser to the dependency array
 
     return (
         <div className='container mt-3'>
             <h2>
                 <div className='row'>
                     <div className="mb-12">
-                        {user?.email !== undefined ? 'List user Ethereum balance' : 'Please login first'}
+                        {user?.email !== undefined ? (
+                            <>
+                                <div>Email: {user.email}</div>
+                                <div>Ethereum Wallet Balance: {balance ? balance : 5000} ETH</div>
+                            </>
+                        ) : (
+                            'Please login first'
+                        )}
                     </div>
                 </div>
             </h2>
         </div>
-    )
+    );
 }

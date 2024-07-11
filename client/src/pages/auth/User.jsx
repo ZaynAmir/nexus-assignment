@@ -11,7 +11,7 @@ export default function User() {
     const navigate = useNavigate()
     const logout = useLogout()
     const [loading, setLoading] = useState(false)
-    const getUser = useUser()
+    const {getUser} = useUser()
 
     useEffect(() => {
         getUser()
